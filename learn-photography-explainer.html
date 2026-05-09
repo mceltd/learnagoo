@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learn Photography – Explainer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Top image */
+    .top-image {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .top-image img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: 20px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Floating puzzle pieces */
+    .puzzle {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.22;
+      z-index: -1;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .p1  { top: 8vh;  left: 6vw;  animation-delay: 0s; }
+    .p2  { top: 18vh; left: 72vw; animation-delay: 1s; }
+    .p3  { top: 30vh; left: 18vw; animation-delay: 2s; }
+    .p4  { top: 42vh; left: 82vw; animation-delay: 3s; }
+    .p5  { top: 56vh; left: 10vw; animation-delay: 1.5s; }
+    .p6  { top: 64vh; left: 60vw; animation-delay: 2.5s; }
+    .p7  { top: 76vh; left: 30vw; animation-delay: 0.8s; }
+    .p8  { top: 12vh; left: 45vw; animation-delay: 3.2s; }
+    .p9  { top: 50vh; left: 50vw; animation-delay: 4s; }
+    .p10 { top: 82vh; left: 75vw; animation-delay: 2.8s; }
+    .p11 { top: 24vh; left: 90vw; animation-delay: 4.5s; }
+    .p12 { top: 88vh; left: 5vw;  animation-delay: 5s; }
+    .p13 { top: 5vh;  left: 85vw; animation-delay: 1.8s; }
+    .p14 { top: 35vh; left: 5vw;  animation-delay: 2.2s; }
+    .p15 { top: 70vh; left: 48vw; animation-delay: 3.6s; }
+    .p16 { top: 92vh; left: 82vw; animation-delay: 4.8s; }
+
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-18px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 40px auto;
+      text-align: center;
+      color: #49c702;
+      line-height: 1.8;
+      padding: 0 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .line {
+      font-size: 1.2rem;
+      margin: 6px 0;
+    }
+
+    .spacer {
+      margin: 18px 0;
+    }
+
+    .repeat-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 25px;
+      padding: 12px 22px;
+      background-color: #49c702;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: 0.2s ease;
+    }
+
+    .repeat-button:hover {
+      background-color: #37a300;
+      box-shadow: 0 0 10px rgba(73, 199, 2, 0.4);
+    }
+
+    .repeat-button .icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 480px) {
+      .line {
+        font-size: 1.05rem;
+      }
+      .puzzle {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+
+  <!-- TOP IMAGE -->
+  <div class="top-image">
+    <img src="rule-of-thirds-cat-comparison.png"
+         alt="Rule of Thirds comparison with a cool cat wearing sunglasses, showing centered example and rule of thirds example">
+  </div>
+
+  <!-- FLOATING PUZZLE PIECES -->
+  <svg class="puzzle p1" viewBox="0 0 100 100"><path fill="#f58529" d="M0 0h60c0 10 10 10 10 20s-10 10-10 20h40v60H0z"/></svg>
+  <svg class="puzzle p2" viewBox="0 0 100 100" style="transform: rotate(90deg);"><path fill="#ff9a9e" d="M0 0h60c0 10 10 10 10 20s-10 10-10 20h40v60H0z"/></svg>
+  <svg class="puzzle p3" viewBox="0 0 100 100"><path fill="#fbc2eb" d="M0 0h100v40c-10 0-10 10-20 10s-10-10-20-10-10 10-20 10-10-10-20-10S10 40 0 40z"/></svg>
+  <svg class="puzzle p4" viewBox="0 0 100 100" style="transform: rotate(180deg);"><path fill="#dd2a7b" d="M0 0h100v40c-10 0-10 10-20 10s-10-10-20-10-10 10-20 10-10-10-20-10S10 40 0 40z"/></svg>
+  <svg class="puzzle p5" viewBox="0 0 100 100"><path fill="#ff9a9e" d="M30 0c0 10 10 10 10 20s-10 10-10 20 10 10 10 20-10 10-10 20 10 10 10 20h40c0-10 10-10 10-20s-10-10-10-20 10-10 10-20-10-10-10-20 10-10 10-20H30z"/></svg>
+  <svg class="puzzle p7" viewBox="0 0 100 100"><path fill="#f58529" d="M30 0h40c0 10-10 10-10 20s10 10 10 20-10 10-10 20 10 10 10 20-10 10-10 20H30c0-10-10-10-10-20s10-10 10-20-10-10-10-20 10-10 10-20S20 10 20 0z"/></svg>
+
+  <svg class="puzzle p13" viewBox="0 0 100 100"><path fill="#a18cd1" d="M0 0h60c0 10 10 10 10 20s-10 10-10 20h40v60H0z"/></svg>
+  <svg class="puzzle p14" viewBox="0 0 100 100"><path fill="#fad0c4" d="M0 0h100v40c-10 0-10 10-20 10s-10-10-20-10-10 10-20 10-10-10-20-10S10 40 0 40z"/></svg>
+  <svg class="puzzle p15" viewBox="0 0 100 100"><path fill="#dd2a7b" d="M30 0c0 10 10 10 10 20s-10 10-10 20 10 10 10 20-10 10-10 20 10 10 10 20h40c0-10 10-10 10-20s-10-10-10-20 10-10 10-20-10-10-10-20 10-10 10-20H30z"/></svg>
+  <svg class="puzzle p16" viewBox="0 0 100 100"><path fill="#fbc2eb" d="M30 0h40c0 10-10 10-10 20s10 10 10 20-10 10-10 20 10 10 10 20-10 10-10 20H30c0-10-10-10-10-20s10-10 10-20-10-10-10-20 10-10 10-20S20 10 20 0z"/></svg>
+
+  <div class="content">
+    <p class="line">The Rule of Thirds is one of the simplest ways you can make your photos look better.</p>
+    <p class="line">Imagine your photo divided into 9 equal squares, like a tic‑tac‑toe grid.</p>
+    <p class="line">Where the lines cross, that’s where your viewer’s eyes naturally go.</p>
+
+    <div class="spacer"></div>
+
+    <p class="line">On the left, the cat is in the middle - that’s the centered example.</p>
+    <p class="line">On the right, the cat sits on one of the grid intersections - that’s the Rule of Thirds in action.</p>
+
+    <div class="spacer"></div>
+
+    <p class="line">Placing your subject off‑center like this makes your photos feel more balanced, interesting, and professional.</p>
+
+    <a href="learn-photography-puzzle.html" class="repeat-button">
+      <span class="icon">▶</span>
+      Play Again
+    </a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>East London Youth Skillathon – Learnagoo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: white;
+      padding: 20px;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 40px auto;
+      text-align: center;
+      color: #49c702;
+      line-height: 1.8;
+      position: relative;
+      padding: 100px 20px;
+    }
+
+    /* 12 speech bubbles scattered */
+    .bubble1, .bubble2, .bubble3, .bubble4, .bubble5, .bubble6,
+    .bubble7, .bubble8, .bubble9, .bubble10, .bubble11, .bubble12 {
+      position: absolute;
+      font-size: 2.4rem;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .bubble1 { top: 10px; left: 20px; }
+    .bubble2 { top: 40px; right: 30px; }
+    .bubble3 { top: 120px; left: -10px; }
+    .bubble4 { top: 180px; right: -5px; }
+    .bubble5 { top: 260px; left: 30px; }
+    .bubble6 { top: 320px; right: 40px; }
+    .bubble7 { bottom: 260px; left: 10px; }
+    .bubble8 { bottom: 220px; right: 20px; }
+    .bubble9 { bottom: 160px; left: -5px; }
+    .bubble10 { bottom: 120px; right: -10px; }
+    .bubble11 { bottom: 60px; left: 40px; }
+    .bubble12 { bottom: 20px; right: 30px; }
+
+    /* 6 scattered smileys */
+    .smile1, .smile2, .smile3, .smile4, .smile5, .smile6 {
+      position: absolute;
+      font-size: 2.6rem;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .smile1 { top: 60px; left: 50%; transform: translateX(-50%); }
+    .smile2 { top: 200px; left: 80px; }
+    .smile3 { top: 260px; right: 80px; }
+    .smile4 { bottom: 200px; left: 60px; }
+    .smile5 { bottom: 140px; right: 60px; }
+    .smile6 { bottom: 40px; left: 50%; transform: translateX(-50%); }
+
+    .event-heading {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 40px;
+      line-height: 1.3;
+    }
+
+    .event-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      line-height: 2;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .event-body {
+      font-size: 1.4rem;
+      line-height: 1.8;
+    }
+
+    .event-note {
+      font-size: 1.3rem;
+      margin-top: 30px;
+    }
+
+    .event-more {
+      font-size: 1.3rem;
+      font-style: italic;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SHARED NAV -->
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+
+  <!-- MAIN CONTENT WITH EMOJI DECORATION -->
+  <div class="content">
+
+    <!-- 12 speech bubbles -->
+    <div class="bubble1">💬</div>
+    <div class="bubble2">🗨️</div>
+    <div class="bubble3">💭</div>
+    <div class="bubble4">💬</div>
+    <div class="bubble5">🗨️</div>
+    <div class="bubble6">💭</div>
+    <div class="bubble7">💬</div>
+    <div class="bubble8">🗨️</div>
+    <div class="bubble9">💭</div>
+    <div class="bubble10">💬</div>
+    <div class="bubble11">🗨️</div>
+    <div class="bubble12">💭</div>
+
+    <!-- 6 smileys -->
+    <div class="smile1">😊</div>
+    <div class="smile2">😊</div>
+    <div class="smile3">😊</div>
+    <div class="smile4">😊</div>
+    <div class="smile5">😊</div>
+    <div class="smile6">😊</div>
+
+    <!-- Heading (subheading removed) -->
+    <p class="event-heading">
+      9 June 2026
+    </p>
+
+    <!-- Title -->
+    <p class="event-title">The East London Youth Skillathon</p>
+
+    <!-- Each phrase on its own line -->
+    <p class="event-body">
+      is a new pilot programme<br>
+      designed to support 18–25 year olds<br>
+      living, working or studying<br>
+      in East London.<br>
+      It’s a day of real talk,<br>
+      honest conversations, practical advice<br>
+      and hands‑on workshops.
+    </p>
+
+    <!-- Short capacity note -->
+    <p class="event-note">
+      The event is free, but spaces are limited.
+    </p>
+
+    <!-- More info -->
+    <p class="event-more">
+      More information coming soon.
+    </p>
+
+  </div>
+
+</body>
+</html>
+
+
+</body>
+</html>
+
+

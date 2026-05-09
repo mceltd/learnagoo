@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learnagoo</title>
+
+  <!-- META DESCRIPTION FOR GOOGLE -->
+  <meta name="description" content="Learnagoo helps build practical digital skills with games. A fun, visual way to learn, grow confidence, and unlock opportunities to grow your online presence.">
+
+  <style>
+    /* ------------------------------
+       GLOBAL PAGE LAYOUT
+    ------------------------------ */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: white;
+      overflow-x: hidden;
+      overflow-y: auto;
+      display: block;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ------------------------------
+       SLIME SPLASH OVERLAY
+    ------------------------------ */
+    .slime-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("slime-splash.jpg");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 10;
+      opacity: 1;
+      pointer-events: none;
+      animation: fadeOut 1s ease-out 1s forwards;
+    }
+
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* ------------------------------
+       HERO SECTION (OWL + TAGLINE)
+    ------------------------------ */
+    .hero {
+      text-align: center;
+      margin-top: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero img {
+      max-width: 90%;
+      height: auto;
+    }
+
+    .tagline {
+      font-size: 2rem;
+      color: #49c702;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SHARED NAV -->
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+
+  <!-- SLIME SPLASH -->
+  <div class="slime-overlay"></div>
+
+  <!-- MAIN CONTENT -->
+  <div class="hero">
+    <img src="learnagoo-logo.jpg" alt="Learnagoo Logo" />
+    <p class="tagline">bite sized gamified learning</p>
+  </div>
+
+  <!-- HOMEPAGE INTRO SECTION -->
+  <div style="
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+  ">
+    <p>Learnagoo helps build practical digital skills with games.</p>
+    <p>It is a new way to make learning feel fun.</p>
+    <p>It builds your confidence and unlocks the opportunities of growing your online presence.</p>
+  </div>
+
+</body>
+</html>

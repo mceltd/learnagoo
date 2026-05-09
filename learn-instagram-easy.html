@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Learnagoo – Learn Instagram – Easy Puzzle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+body {
+    margin: 0;
+    background: linear-gradient(135deg,
+        #f58529 0%,
+        #dd2a7b 25%,
+        #8134af 50%,
+        #515bd4 100%
+    );
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.upload-area {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    cursor: pointer;
+    border: 4px dashed #ccc;
+    transition: border-color 0.3s;
+}
+
+.upload-area:hover {
+    border-color: #dd2a7b;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.timer {
+    background: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #dd2a7b;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: #dd2a7b;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #c2186a;
+}
+
+.btn-secondary {
+    background: #4b5563;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #374151;
+}
+
+.success-message {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.success-message.show {
+    display: flex;
+}
+
+.puzzle-section, .pieces-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.puzzle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.puzzle-slot {
+    border: 4px solid #ccc;
+    border-radius: 8px;
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #ccc;
+}
+
+.puzzle-slot.filled {
+    border-color: #dd2a7b;
+}
+
+.pieces-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.puzzle-piece {
+    border-radius: 8px;
+    cursor: move;
+    background-repeat: no-repeat;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* NEXT BUTTON */
+.next-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 22px;
+    background-color: #49c702;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: 0.2s ease;
+}
+
+.next-button:hover {
+    background-color: #37a300;
+    box-shadow: 0 0 10px rgba(73, 199, 2, 0.4);
+}
+
+.next-button .icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SHARED NAV -->
+<div id="nav-placeholder"></div>
+<script>
+fetch("nav.html")
+    .then(res => res.text())
+    .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+</script>
+
+<div class="container">
+
+<h1>Learn Instagram – Easy Puzzle</h1>
+
+<div class="upload-area" id="uploadArea">
+    <p style="color:#666; font-size:20px;">Click to upload a photo</p>
+    <p style="color:#999; font-size:14px;">JPG, PNG, or GIF</p>
+</div>
+
+<input accept="image/*" id="fileInput" type="file" />
+
+<div class="hidden" id="gameArea">
+
+<div class="controls">
+    <button class="btn-primary" onclick="shufflePuzzle()">Shuffle Again</button>
+    <div class="timer" id="timer">00:00</div>
+    <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">New Image</button>
+</div>
+
+<!-- SUCCESS MESSAGE WITH NEXT BUTTON -->
+<div class="success-message" id="successMessage">
+    <div>
+        <div style="color:#065f46; font-size:20px; font-weight:600;">Puzzle Complete!</div>
+        <div id="completionTime" style="color:#047857; font-size:16px;"></div>
+    </div>
+
+    <a href="learn-instagram-explainer.html" class="next-button">
+        <span class="icon">➜</span>
+        Next
+    </a>
+</div>
+
+<div class="puzzle-section">
+    <h2>Puzzle Area</h2>
+    <div class="puzzle-grid" id="puzzleGrid"></div>
+</div>
+
+<div class="pieces-section">
+    <h2>Drag Pieces From Here</h2>
+    <div class="pieces-container" id="piecesContainer"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+const ROWS = 2;
+const COLS = 3;
+const TOTAL = ROWS * COLS;
+
+let currentImage = null;
+let slots = Array(TOTAL).fill(null);
+let availablePieces = [];
+let draggedPieceIndex = null;
+let draggedFromSlot = false;
+let timerInterval = null;
+let startTime = null;
+let elapsedTime = 0;
+
+function getPieceSize() {
+    const maxGrid = 390;
+    const gridWidth = Math.min(window.innerWidth - 40, maxGrid);
+    return Math.floor(gridWidth / COLS);
+}
+
+function startTimer() {
+    startTime = Date.now();
+    timerInterval = setInterval(updateTimer, 100);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function updateTimer() {
+    elapsedTime = Date.now() - startTime;
+    const seconds = Math.floor(elapsedTime / 1000);
+    const minutes = Math.floor(seconds / 60);
+    document.getElementById('timer').textContent =
+        `${String(minutes).padStart(2,'0')}:${String(seconds % 60).padStart(2,'0')}`;
+}
+
+document.getElementById('uploadArea').onclick = () =>
+    document.getElementById('fileInput').click();
+
+document.getElementById('fileInput').onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = ev => {
+        currentImage = ev.target.result;
+        initializePuzzle();
+    };
+    reader.readAsDataURL(file);
+};
+
+function initializePuzzle() {
+    document.getElementById('uploadArea').classList.add('hidden');
+    document.getElementById('gameArea').classList.remove('hidden');
+    shufflePuzzle();
+}
+
+function shufflePuzzle() {
+    slots = Array(TOTAL).fill(null);
+    availablePieces = [...Array(TOTAL).keys()].sort(() => Math.random() - 0.5);
+
+    document.getElementById('successMessage').classList.remove('show');
+    document.querySelector('.pieces-section').classList.remove('hidden');
+
+    renderPuzzle();
+    stopTimer();
+    startTimer();
+}
+
+function renderPuzzle() {
+    const PIECE_SIZE = getPieceSize();
+    const grid = document.getElementById('puzzleGrid');
+
+    grid.style.width = `${PIECE_SIZE * COLS + 16}px`;
+    grid.innerHTML = '';
+
+    slots.forEach((piece, i) => {
+        const slot = document.createElement('div');
+        slot.className = 'puzzle-slot';
+        slot.dataset.slotIndex = i;
+        slot.style.width = PIECE_SIZE + "px";
+        slot.style.height = PIECE_SIZE + "px";
+
+        if (piece !== null) {
+            slot.classList.add('filled');
+            slot.appendChild(createPiece(piece, true, i, PIECE_SIZE));
+        } else {
+            slot.textContent = i + 1;
+        }
+
+        slot.ondragover = e => e.preventDefault();
+        slot.ondrop = handleDrop;
+
+        grid.appendChild(slot);
+    });
+
+    const container = document.getElementById('piecesContainer');
+    container.innerHTML = '';
+
+    availablePieces.forEach(i =>
+        container.appendChild(createPiece(i, false, null, PIECE_SIZE))
+    );
+}
+
+function createPiece(index, inSlot, slotIndex, PIECE_SIZE) {
+    const piece = document.createElement('div');
+    piece.className = 'puzzle-piece';
+    piece.draggable = true;
+    piece.dataset.index = index;
+    piece.dataset.inSlot = inSlot;
+
+    if (inSlot) piece.dataset.slotIndex = slotIndex;
+
+    piece.style.width = PIECE_SIZE + "px";
+    piece.style.height = PIECE_SIZE + "px";
+
+    const row = Math.floor(index / COLS);
+    const col = index % COLS;
+
+    piece.style.backgroundImage = `url(${currentImage})`;
+    piece.style.backgroundSize = `${PIECE_SIZE * COLS}px ${PIECE_SIZE * ROWS}px`;
+    piece.style.backgroundPosition = `-${col * PIECE_SIZE}px -${row * PIECE_SIZE}px`;
+
+    piece.ondragstart = handleDragStart;
+    piece.ondragend = handleDragEnd;
+
+    return piece;
+}
+
+function handleDragStart(e) {
+    draggedPieceIndex = parseInt(e.target.dataset.index);
+    draggedFromSlot = e.target.dataset.inSlot === 'true';
+    e.target.classList.add('dragging');
+}
+
+function handleDragEnd(e) {
+    e.target.classList.remove('dragging');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    const targetSlot = parseInt(e.currentTarget.dataset.slotIndex);
+
+    if (draggedFromSlot) {
+        const sourceSlot = parseInt(
+            document.querySelector(`[data-index="${draggedPieceIndex}"]`).dataset.slotIndex
+        );
+
+        const temp = slots[targetSlot];
+        slots[targetSlot] = draggedPieceIndex;
+        slots[sourceSlot] = temp;
+
+    } else {
+        if (slots[targetSlot] !== null) {
+            availablePieces.push(slots[targetSlot]);
+        }
+
+        availablePieces = availablePieces.filter(p => p !== draggedPieceIndex);
+        slots[targetSlot] = draggedPieceIndex;
+    }
+
+    renderPuzzle();
+    checkCompletion();
+}
+
+function checkCompletion() {
+    if (slots.every((p, i) => p === i)) {
+        stopTimer();
+
+        document.getElementById('successMessage').classList.add('show');
+        document.getElementById('completionTime').textContent =
+            `Completed in ${Math.floor(elapsedTime/1000)} seconds`;
+
+        document.querySelector('.pieces-section').classList.add('hidden');
+    }
+}
+
+window.addEventListener("resize", renderPuzzle);
+</script>
+
+</body>
+</html>
