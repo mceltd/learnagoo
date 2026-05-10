@@ -138,7 +138,7 @@ h2 {
   grid-template-columns: repeat(3, 130px);
   gap: 8px;
   margin: 0 auto;
-  width: 390px; /* 130 × 3 */
+  width: 390px;
 }
 
 .puzzle-slot {
@@ -172,9 +172,11 @@ h2 {
   border-radius: 8px;
   cursor: move;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  background-size: 300% 200%; /* ⭐ BLOGGER SLICING */
+  background-size: 300% 200%;
   touch-action: none;
+  transition: opacity 0.15s;
 }
+
 .puzzle-piece.dragging {
   opacity: 0.5;
 }
@@ -194,6 +196,7 @@ h2 {
     height: 100px;
   }
 }
+
 .hidden { display: none !important; }
 #fileInput { display: none; }
 </style>
@@ -254,7 +257,7 @@ fetch("nav.html")
 </div>
 
 <script>
-/* ⭐ EXACT BLOGGER LOGIC — STABLE, MOBILE-PERFECT */
+/* ⭐ HYBRID DRAG SYSTEM — DESKTOP + MOBILE */
 
 let currentImage = null;
 let slots = [null, null, null, null, null, null];
@@ -266,6 +269,11 @@ let draggedFromSlot = false;
 let timerInterval = null;
 let startTime = null;
 let elapsedTime = 0;
+
+let isTouchDragging = false;
+let clone = null;
+let touchOffsetX = 0;
+let touchOffsetY = 0;
 
 function startTimer() {
   startTime = Date.now();
@@ -362,24 +370,113 @@ function createPiece(index, inSlot, slotIndex = null) {
   piece.style.backgroundImage = `url(${currentImage})`;
   piece.style.backgroundPosition = `${col * 50}% ${row * 100}%`;
 
+  /* DESKTOP DRAG */
   piece.addEventListener("dragstart", handleDragStart);
   piece.addEventListener("dragend", handleDragEnd);
+
+  /* MOBILE TOUCH DRAG */
+  piece.addEventListener("touchstart", handleTouchStart, { passive: false });
+  piece.addEventListener("touchmove", handleTouchMove, { passive: false });
+  piece.addEventListener("touchend", handleTouchEnd, { passive: false });
 
   return piece;
 }
 
+/* ⭐ DESKTOP DRAG */
 function handleDragStart(e) {
+  if (isTouchDragging) return;
+
   draggedElement = e.target;
   draggedPieceIndex = parseInt(e.target.dataset.pieceIndex);
   draggedFromSlot = e.target.dataset.inSlot === "true";
+
+  const img = new Image();
+  img.src = "";
+  e.dataTransfer.setDragImage(img, 0, 0);
+
   e.target.classList.add("dragging");
 }
 
 function handleDragEnd(e) {
-  e.target.classList.remove("dragging");
+  if (!isTouchDragging) e.target.classList.remove("dragging");
 }
 
+/* ⭐ MOBILE TOUCH DRAG */
+function handleTouchStart(e) {
+  e.preventDefault();
+  isTouchDragging = true;
+
+  draggedElement = e.target;
+  draggedPieceIndex = parseInt(e.target.dataset.pieceIndex);
+  draggedFromSlot = e.target.dataset.inSlot === "true";
+
+  const touch = e.touches[0];
+  const rect = draggedElement.getBoundingClientRect();
+
+  touchOffsetX = touch.clientX - rect.left;
+  touchOffsetY = touch.clientY - rect.top;
+
+  clone = draggedElement.cloneNode(true);
+  clone.style.position = "fixed";
+  clone.style.left = rect.left + "px";
+  clone.style.top = rect.top + "px";
+  clone.style.opacity = "0.8";
+  clone.style.zIndex = "9999";
+  clone.style.pointerEvents = "none";
+
+  document.body.appendChild(clone);
+
+  draggedElement.style.opacity = "0.3";
+}
+
+function handleTouchMove(e) {
+  if (!clone) return;
+  e.preventDefault();
+
+  const touch = e.touches[0];
+  clone.style.left = (touch.clientX - touchOffsetX) + "px";
+  clone.style.top = (touch.clientY - touchOffsetY) + "px";
+}
+
+function handleTouchEnd(e) {
+  if (!clone) return;
+
+  const touch = e.changedTouches[0];
+  const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+  const slot = dropTarget?.closest(".puzzle-slot");
+
+  clone.remove();
+  clone = null;
+  draggedElement.style.opacity = "1";
+
+  if (slot) {
+    const targetSlotIndex = parseInt(slot.dataset.slotIndex);
+
+    if (draggedFromSlot) {
+      const sourceSlotIndex = parseInt(draggedElement.dataset.slotIndex);
+      const temp = slots[targetSlotIndex];
+      slots[targetSlotIndex] = draggedPieceIndex;
+      slots[sourceSlotIndex] = temp;
+    } else {
+      if (slots[targetSlotIndex] !== null) {
+        availablePieces.push(slots[targetSlotIndex]);
+      }
+      availablePieces = availablePieces.filter(p => p !== draggedPieceIndex);
+      slots[targetSlotIndex] = draggedPieceIndex;
+    }
+
+    renderPuzzle();
+    checkCompletion();
+  }
+
+  isTouchDragging = false;
+}
+
+/* ⭐ DROP HANDLER (DESKTOP) */
 function handleDrop(e) {
+  if (isTouchDragging) return;
+
   const targetSlotIndex = parseInt(e.currentTarget.dataset.slotIndex);
 
   if (draggedFromSlot) {
@@ -399,6 +496,7 @@ function handleDrop(e) {
   checkCompletion();
 }
 
+/* ⭐ COMPLETION CHECK */
 function checkCompletion() {
   if (slots.every((p, i) => p === i)) {
     stopTimer();
