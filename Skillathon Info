@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Skillathon Info</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: white;
+      text-align: center;
+      color: #000;
+    }
+
+    .carousel-container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .carousel-image {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2.5rem;
+      color: #49c702;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+    }
+
+    .arrow:hover {
+      color: #37a300;
+    }
+
+    .left-arrow {
+      left: -40px;
+    }
+
+    .right-arrow {
+      right: -40px;
+    }
+
+    @media (max-width: 480px) {
+      .arrow {
+        font-size: 2rem;
+        padding: 5px;
+      }
+      .left-arrow { left: -20px; }
+      .right-arrow { right: -20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Skillathon Photo Gallery</h1>
+
+  <div class="carousel-container">
+    <span class="arrow left-arrow" onclick="prevImage()">&#10094;</span>
+
+    <img id="carousel" class="carousel-image" src="Skillathon Info 1.jpg" alt="Skillathon photo">
+
+    <span class="arrow right-arrow" onclick="nextImage()">&#10095;</span>
+  </div>
+
+  <script>
+    const images = [
+      "Skillathon Info 1.jpg",
+      "Skillathon Info 2.jpg",
+      "Skillathon Info 3.jpg",
+      "Skillathon Info 4.jpg",
+      "Skillathon Info 5.jpg",
+      "Skillathon Info 6.jpg",
+      "Skillathon Info 7.jpg",
+      "Skillathon Info 8.jpg"
+      // Add 9 and 10 later if needed
+    ];
+
+    let index = 0;
+
+    function showImage() {
+      document.getElementById("carousel").src = images[index];
+    }
+
+    function nextImage() {
+      index = (index + 1) % images.length;
+      showImage();
+    }
+
+    function prevImage() {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    }
+  </script>
+
+</body>
+</html>
