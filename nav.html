@@ -23,7 +23,7 @@
     align-items: flex-start;
     position: sticky;
     top: 0;
-    z-index: 20;
+    z-index: 9999; /* ensures tap works above slime overlay */
   }
 
   .navbar .logo {
@@ -33,11 +33,14 @@
     margin-bottom: 10px;
   }
 
+  /* ONLY CHANGE: bigger hamburger + bigger tap area */
   .hamburger {
-    font-size: 2rem;
+    font-size: 2.6rem;     /* was 2rem */
     color: white;
     cursor: pointer;
     margin-bottom: 10px;
+    line-height: 1;
+    padding: 8px 12px;     /* increases tap area without changing layout */
   }
 
   #menu-toggle {
@@ -47,13 +50,12 @@
   .menu {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 15px 20px;
     background: #49c702;
     width: 260px;
+    display: none;
     flex-direction: column;
     gap: 10px;
-    padding: 15px 20px;
-    display: none;
   }
 
   .menu a {
