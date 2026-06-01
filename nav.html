@@ -1,69 +1,141 @@
-<nav class="navbar">
-  <div class="logo">Learnagoo</div>
+<!-- NAV WRAPPER TO PROTECT STYLES -->
+<nav class="learnagoo-nav">
+  <div class="nav-inner">
 
-  <input type="checkbox" id="menu-toggle">
-  <label for="menu-toggle" class="hamburger">&#9776;</label>
+    <div class="logo">Learnagoo</div>
 
-  <ul class="menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="learn-instagram-easy.html">Learn Instagram – Easy Puzzle</a></li>
-    <li><a href="learn-photography-puzzle.html">Learn Photography Puzzle</a></li>
-    <li><a href="East-London-Youth-Skillathon.html">East London Youth Skillathon</a></li>
-  </ul>
+    <!-- Hamburger -->
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Menu -->
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="learn-instagram-easy.html">Learn Instagram – Easy Puzzle</a></li>
+      <li><a href="learn-photography-puzzle.html">Learn Photography Puzzle</a></li>
+      <li><a href="East-London-Youth-Skillathon.html">East London Youth Skillathon</a></li>
+    </ul>
+
+  </div>
 </nav>
 
 <style>
-  .navbar {
-    width: 100%;
-    background: #49c702;
-    padding: 15px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    position: sticky;
-    top: 0;
-    z-index: 20;
-  }
+/* -------------------------------------------------
+   LEARNAGOO NAV — SELF-CONTAINED, UNBREAKABLE
+-------------------------------------------------- */
+.learnagoo-nav {
+  width: 100%;
+  background: #49c702;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-  .navbar .logo {
-    color: white;
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+/* Inner wrapper prevents outside CSS interference */
+.learnagoo-nav .nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .hamburger {
-    font-size: 2rem;
-    color: white;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
+/* Logo */
+.learnagoo-nav .logo {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
 
-  #menu-toggle {
+/* Hamburger */
+.learnagoo-nav .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.learnagoo-nav .hamburger span {
+  width: 28px;
+  height: 3px;
+  background: white;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* Hide checkbox */
+.learnagoo-nav #menu-toggle {
+  display: none;
+}
+
+/* Menu */
+.learnagoo-nav .menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #49c702;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 220px;
+  border-radius: 10px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+.learnagoo-nav .menu li {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.learnagoo-nav .menu li:last-child {
+  border-bottom: none;
+}
+
+.learnagoo-nav .menu a {
+  display: block;
+  padding: 14px 18px;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.learnagoo-nav .menu a:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+/* Show menu when checked */
+.learnagoo-nav #menu-toggle:checked ~ .menu {
+  display: flex;
+}
+
+/* Desktop layout */
+@media (min-width: 700px) {
+  .learnagoo-nav .hamburger {
     display: none;
   }
 
-  .menu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background: #49c702;
-    width: 260px;
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 20px;
-    display: none;
+  .learnagoo-nav .menu {
+    position: static;
+    display: flex !important;
+    flex-direction: row;
+    width: auto;
+    background: none;
+    box-shadow: none;
   }
 
-  .menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
+  .learnagoo-nav .menu li {
+    border: none;
   }
 
-  #menu-toggle:checked + .hamburger + .menu {
-    display: flex;
+  .learnagoo-nav .menu a {
+    padding: 10px 16px;
   }
+}
 </style>
-
