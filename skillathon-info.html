@@ -64,7 +64,7 @@
 
 <body>
 
-   <!-- SHARED NAV -->
+  <!-- SHARED NAV -->
   <div id="nav-placeholder"></div>
   <script>
     fetch("nav.html")
@@ -72,19 +72,28 @@
       .then(html => document.getElementById("nav-placeholder").innerHTML = html);
   </script>
 
-    <!-- MAIN CONTENT -->
-  
+  <!-- MAIN CONTENT (no heading, as requested) -->
   <div class="carousel-container">
     <span class="arrow left-arrow" onclick="prevImage()">&#10094;</span>
 
-    <!-- FIXED: Correct initial image filename -->
     <img id="carousel" class="carousel-image" src="skillathon-info-1.jpg" alt="Skillathon photo">
 
     <span class="arrow right-arrow" onclick="nextImage()">&#10095;</span>
   </div>
 
+  <!-- ⭐ BOOK ON EVENTBRITE ⭐ -->
+  <p class="event-more" style="margin-top: 30px;">
+    <a href="https://tinyurl.com/skillathon0906" target="_blank" style="
+      color: #000;
+      text-decoration: underline;
+      font-weight: bold;
+      font-size: 1.2rem;
+    ">
+      Book on Eventbrite
+    </a>
+  </p>
+
   <script>
-    /* FIXED: Correct array + missing comma */
     const images = [
       "skillathon-info-1.jpg",
       "skillathon-info-2.jpg",
