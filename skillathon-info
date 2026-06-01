@@ -76,14 +76,16 @@
 
   <script>
     const images = [
-      "Skillathon Info 1.jpg",
-      "Skillathon Info 2.jpg",
-      "Skillathon Info 3.jpg",
-      "Skillathon Info 4.jpg",
-      "Skillathon Info 5.jpg",
-      "Skillathon Info 6.jpg",
-      "Skillathon Info 7.jpg",
-      "Skillathon Info 8.jpg"
+      "skillathon-info-1.jpg",
+      "skillathon-info-2.jpg",
+      "skillathon-info-3.jpg",
+      "skillathon-info-4.jpg",
+      "skillathon-info-5.jpg",
+      "skillathon-info-6.jpg",
+      "skillathon-info-7.jpg",
+      "skillathon-info-8.jpg",
+      "skillathon-info-9.jpg"
+       "skillathon-info-10.jpg" 
       // Add 9 and 10 later if needed
     ];
 
