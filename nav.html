@@ -1,18 +1,20 @@
-<!-- NAV WRAPPER TO PROTECT STYLES -->
+<!-- NAV WRAPPER -->
 <nav class="learnagoo-nav">
   <div class="nav-inner">
 
-    <div class="logo">Learnagoo</div>
+    <!-- LEFT SIDE: LOGO + HAMBURGER -->
+    <div class="left-group">
+      <div class="logo">Learnagoo</div>
 
-    <!-- Hamburger -->
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </label>
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
 
-    <!-- Menu -->
+    <!-- MENU -->
     <ul class="menu">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
@@ -26,7 +28,7 @@
 
 <style>
 /* -------------------------------------------------
-   LEARNAGOO NAV — SELF-CONTAINED, UNBREAKABLE
+   LEARNAGOO NAV — MATCHES ABOUT PAGE
 -------------------------------------------------- */
 .learnagoo-nav {
   width: 100%;
@@ -37,29 +39,31 @@
   z-index: 999;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-
-  /* ⭐ FIX: Prevent mobile shrinking */
-  height: 60px;
+  height: 60px; /* FIXED HEIGHT */
 }
 
-/* Inner wrapper prevents outside CSS interference */
 .learnagoo-nav .nav-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  /* ⭐ FIX: Ensures hamburger + logo align perfectly */
-  height: 60px;
+  height: 60px; /* FIXED HEIGHT */
 }
 
-/* Logo */
+/* LEFT GROUP (LOGO + HAMBURGER) */
+.learnagoo-nav .left-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* LOGO */
 .learnagoo-nav .logo {
   color: white;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-/* Hamburger */
+/* HAMBURGER */
 .learnagoo-nav .hamburger {
   display: flex;
   flex-direction: column;
@@ -75,12 +79,12 @@
   transition: 0.3s;
 }
 
-/* Hide checkbox */
+/* HIDE CHECKBOX */
 .learnagoo-nav #menu-toggle {
   display: none;
 }
 
-/* Menu */
+/* MOBILE MENU (LEFT SIDE) */
 .learnagoo-nav .menu {
   list-style: none;
   margin: 0;
@@ -88,7 +92,7 @@
   background: #49c702;
   position: absolute;
   top: 60px;
-  right: 20px;
+  left: 20px; /* SAME AS ABOUT PAGE */
   width: 220px;
   border-radius: 10px;
   display: none;
@@ -116,12 +120,12 @@
   background: rgba(0,0,0,0.1);
 }
 
-/* Show menu when checked */
+/* SHOW MENU WHEN CHECKED */
 .learnagoo-nav #menu-toggle:checked ~ .menu {
   display: flex;
 }
 
-/* Desktop layout */
+/* DESKTOP */
 @media (min-width: 700px) {
   .learnagoo-nav .hamburger {
     display: none;
