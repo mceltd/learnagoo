@@ -54,8 +54,8 @@
       z-index: 1;
     }
 
-    /* IMPORTANT: scoped so it does NOT affect nav icons */
-    .hero > img {
+    /* Only affects the hero logo — NOT the nav */
+    .hero img {
       max-width: 90%;
       height: auto;
     }
@@ -64,17 +64,6 @@
       font-size: 2rem;
       color: #49c702;
       margin-top: 25px;
-    }
-
-    /* ------------------------------
-       FIX FOR HAMBURGER SIZE
-    ------------------------------ */
-    nav img,
-    .menu-icon img,
-    .hamburger img {
-      width: 32px !important;
-      height: auto !important;
-      max-width: none !important;
     }
 
     /* ------------------------------
