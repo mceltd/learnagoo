@@ -64,6 +64,15 @@
 
 <body>
 
+   <!-- SHARED NAV -->
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("nav.html")
+      .then(res => res.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+
+    <!-- MAIN CONTENT -->
   <h1>Skillathon Info</h1>
 
   <div class="carousel-container">
